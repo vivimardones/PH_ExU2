@@ -1,0 +1,21 @@
+ion-card {
+    margin: 16px;
+  }
+  
+  ion-card-header {
+    background-color: #f8f9fa;
+  }
+  
+  ion-card-title {
+    font-size: 1.2em;
+    color: #1e90ff;  // Color del texto del título
+  }
+  
+  ion-card-content p {
+    font-style: italic;
+  }
+  
+  ion-button {
+    --background: #1e90ff;  // Color de los botones
+  }
+  

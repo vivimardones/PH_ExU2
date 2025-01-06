@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Configuración</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" />
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/gestionar-citas']">
+        <ion-icon name="build-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label>Permitir eliminar citas en el Inicio</ion-label>
+    <ion-toggle [(ngModel)]="permitirBorrado"></ion-toggle>
+  </ion-item>
+</ion-content>
