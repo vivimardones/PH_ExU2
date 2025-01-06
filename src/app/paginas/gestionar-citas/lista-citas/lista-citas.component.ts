@@ -1,29 +1,34 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonList, IonItem, IonLabel, IonCard, IonCardHeader, 
-  IonCardTitle, IonCardContent,
+import { IonList, IonItem, IonLabel, 
   IonButton, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { trash } from 'ionicons/icons';
+import { Citas } from 'src/app/modelo/citas';
+import { CitasService } from 'src/app/servicio/citas.service';
 
 @Component({
   selector: 'app-lista-citas',
   templateUrl: './lista-citas.component.html',
   styleUrls: ['./lista-citas.component.scss'],
   standalone: true,
-  imports: [IonList, IonItem, IonLabel, IonButton, IonIcon, IonCard, 
-    IonCardHeader, IonCardTitle, IonCardContent, CommonModule, FormsModule]
+  imports: [IonList, IonItem, IonLabel, IonButton, IonIcon,  
+    CommonModule, FormsModule]
 })
-export class ListaCitasComponent {
-  @Input() citas: { frase: string; autor: string }[] = [];
+export class ListaCitasComponent implements OnInit {
+  @Input() citas:  Citas[] | null = null;
   @Output() borrarCita = new EventEmitter<number>();
 
-  constructor() {
+  constructor(private citasService: CitasService) {
     addIcons({trash});
   }
 
-  onBorrarCita(index: number) {
-    this.borrarCita.emit(index);
+  async ngOnInit() {
+    await this.citasService.iniciarPlugin();
+  }
+  
+  async onBorrarCita(id: number) {
+    await this.borrarCita.emit(id);
   }
 }

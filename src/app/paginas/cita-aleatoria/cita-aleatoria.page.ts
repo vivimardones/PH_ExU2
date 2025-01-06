@@ -7,8 +7,9 @@ import { IonButtons, IonButton, IonIcon,
   IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
 import { CitasService } from '../../servicio/citas.service';
 import { addIcons } from 'ionicons'
-import { settingsOutline, addOutline, buildOutline, addCircle, addCircleOutline } from 'ionicons/icons'
+import { settingsOutline, addOutline } from 'ionicons/icons'
 import { RouterModule } from '@angular/router';
+import { Citas } from 'src/app/modelo/citas';
 
 @Component({
   selector: 'app-cita',
@@ -22,14 +23,19 @@ import { RouterModule } from '@angular/router';
     IonButtons, IonButton, IonIcon]
 })
 export class CitaAleatoriaPage implements OnInit {
-  citaAleatoria: { frase: string; autor: string } = { frase: '', autor: '' };
+  citaAleatoria: Citas | null = null;
 
   constructor(private citasService: CitasService) {
-      addIcons({settingsOutline,addCircle,addCircleOutline,buildOutline,addOutline});
+      addIcons({settingsOutline,addOutline});
    }
 
-  ngOnInit() {
-    this.citaAleatoria = this.citasService.getCitaAleatoria();
+  async ngOnInit() {
+    await this.citasService.iniciarPlugin();
+    await this._actualizar()
   }
-
+  
+  async _actualizar() {
+    this.citaAleatoria = await this.citasService.getCitaAleatoria();
+  }
+  
 }

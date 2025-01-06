@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core'
 import { IonCard, IonCardHeader, IonCardTitle, 
   IonCardContent, IonItem, IonLabel, IonInput, IonButton,
-  IonBackButton, IonText } from '@ionic/angular/standalone'
+  IonText } from '@ionic/angular/standalone'
 import { CommonModule } from '@angular/common'
 import { FormsModule, NgForm } from '@angular/forms'
 
@@ -12,16 +12,16 @@ import { FormsModule, NgForm } from '@angular/forms'
   standalone: true,
   imports: [IonCard, IonCardHeader, IonCardTitle, 
     IonCardContent, IonItem, IonLabel, IonInput, IonButton,
-    IonBackButton, CommonModule, FormsModule, IonText],
+    CommonModule, FormsModule, IonText],
 })
 export class FormularioCitaComponent {
   @Output() agregarCita = new EventEmitter<{ frase: string; autor: string }>();
-  
+
   nuevaCita: { frase: string; autor: string } = { frase: '', autor: '' };
 
-  onAgregarCita(form: NgForm) {
+  async onAgregarCita(form: NgForm) {
     if (form.valid) {
-      this.agregarCita.emit(this.nuevaCita);
+      await this.agregarCita.emit(this.nuevaCita);
       this.nuevaCita = { frase: '', autor: '' };
       form.resetForm();
     }
